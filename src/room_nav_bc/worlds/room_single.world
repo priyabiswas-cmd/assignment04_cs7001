@@ -1,0 +1,218 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <world name='room'>
+    <include><uri>model://ground_plane</uri></include>
+<include><uri>model://sun</uri></include>
+
+    <physics type='ode'>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+    </physics>
+
+    <scene>
+      <ambient>0.5 0.5 0.5 1</ambient>
+      <shadows>false</shadows>
+    </scene>
+    <gui fullscreen='0'>
+      <camera name='top_down'>
+        <pose>0 1.9500 4.5 0 1.5707 1.5707</pose>
+        <projection_type>orthographic</projection_type>
+      </camera>
+    </gui>
+    <plugin name='gazebo_ros_state' filename='libgazebo_ros_state.so'>
+      <ros><namespace>/gazebo</namespace></ros>
+      <update_rate>50</update_rate>
+    </plugin>
+
+  <model name='wall_south'>
+    <static>true</static>
+    <pose>0.0000 -0.0250 0.1500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>3.1 0.05 0.3</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>3.1 0.05 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.85 0.82 1</ambient>
+          <diffuse>0.85 0.85 0.82 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='wall_north'>
+    <static>true</static>
+    <pose>0.0000 3.9250 0.1500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>3.1 0.05 0.3</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>3.1 0.05 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.85 0.82 1</ambient>
+          <diffuse>0.85 0.85 0.82 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='wall_west'>
+    <static>true</static>
+    <pose>-1.5250 1.9500 0.1500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.05 4.0 0.3</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.05 4.0 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.85 0.82 1</ambient>
+          <diffuse>0.85 0.85 0.82 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='wall_east'>
+    <static>true</static>
+    <pose>1.5250 1.9500 0.1500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.05 4.0 0.3</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.05 4.0 0.3</size></box></geometry>
+        <material>
+          <ambient>0.85 0.85 0.82 1</ambient>
+          <diffuse>0.85 0.85 0.82 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='island'>
+    <static>true</static>
+    <pose>0 1.8000 0.1500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.6 0.6 0.3</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.6 0.6 0.3</size></box></geometry>
+        <material>
+          <ambient>0.45 0.30 0.20 1</ambient>
+          <diffuse>0.45 0.30 0.20 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='gap_box_left'>
+    <static>true</static>
+    <pose>-0.4250 2.9000 0.1500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.55 0.25 0.25 1</ambient>
+          <diffuse>0.55 0.25 0.25 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='gap_box_right'>
+    <static>true</static>
+    <pose>0.4250 2.9000 0.1500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.4 0.4 0.3</size></box></geometry>
+        <material>
+          <ambient>0.25 0.35 0.55 1</ambient>
+          <diffuse>0.25 0.35 0.55 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='lamp_l'>
+    <static>true</static>
+    <pose>-1.1500 0.9000 0.2500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.15 0.15 0.5</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.15 0.15 0.5</size></box></geometry>
+        <material>
+          <ambient>0.90 0.75 0.20 1</ambient>
+          <diffuse>0.90 0.75 0.20 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='lamp_r'>
+    <static>true</static>
+    <pose>1.1500 0.9000 0.2500 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.15 0.15 0.5</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.15 0.15 0.5</size></box></geometry>
+        <material>
+          <ambient>0.90 0.75 0.20 1</ambient>
+          <diffuse>0.90 0.75 0.20 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='shelf_l'>
+    <static>true</static>
+    <pose>-1.0500 3.4000 0.1000 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.5 0.25 0.2</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.5 0.25 0.2</size></box></geometry>
+        <material>
+          <ambient>0.25 0.55 0.55 1</ambient>
+          <diffuse>0.25 0.55 0.55 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='shelf_r'>
+    <static>true</static>
+    <pose>1.0500 3.4000 0.1000 0 0 0</pose>
+    <link name='link'>
+      <collision name='c'>
+        <geometry><box><size>0.5 0.25 0.2</size></box></geometry>
+      </collision>
+      <visual name='v'>
+        <geometry><box><size>0.5 0.25 0.2</size></box></geometry>
+        <material>
+          <ambient>0.25 0.55 0.55 1</ambient>
+          <diffuse>0.25 0.55 0.55 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+  <model name='goal_mark'>
+    <static>true</static>
+    <pose>0 3.6000 0.0060 0 0 0</pose>
+    <link name='link'>
+      <visual name='v'>
+        <geometry><box><size>0.6 0.5 0.012</size></box></geometry>
+        <material>
+          <ambient>0.95 0.75 0.15 1</ambient>
+          <diffuse>0.95 0.75 0.15 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+  </world>
+</sdf>

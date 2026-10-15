@@ -1,0 +1,70 @@
+# Start poses, goal region, and obstacle geometry for room_single.world.
+#
+# These numbers mirror worlds/generate_room.py's constants (ISLAND_*,
+# GAP_*, GOAL_*, ROOM_*) - if you regenerate the world with different
+# layout constants, update this file to match, the same way
+# parking_bc/config/start_poses.yaml stays in sync with its world.
+#
+# Train starts sit near x=0 (roughly equidistant from both sides of the
+# island) on purpose, same reasoning as parking_bc's "hard" set: the
+# choice of which side to pass the island on should come from the
+# demonstrator/expert, not be forced by starting position. yaw is in
+# DEGREES here for readability.
+
+room:
+  x_min: -1.5
+  x_max: 1.5
+  y_min: 0.0
+  y_max: 3.9
+
+goal:
+  x: 0.0
+  y: 3.6
+  w: 0.6
+  h: 0.5
+
+obstacles:
+  island:    {x: 0.0,    y: 1.8, w: 0.6, h: 0.6}
+  # 0.6 m of clear y-space between the island's far edge (2.1) and the
+  # gap boxes' near edge (2.7) - widened from the original 0.3 m, which
+  # verify_expert_room.py proved was narrower than 2x the robot's own
+  # safety clearance (i.e. no path could cross it without a collision,
+  # regardless of controller tuning).
+  gap_left:  {x: -0.425, y: 2.9, w: 0.4, h: 0.4}
+  gap_right: {x: 0.425,  y: 2.9, w: 0.4, h: 0.4}
+  # decorative landmarks, mirrored left/right so neither side of the
+  # island looks visually different from the other (see generate_room.py)
+  lamp_l:    {x: -1.15,  y: 0.9, w: 0.15, h: 0.15}
+  lamp_r:    {x: 1.15,   y: 0.9, w: 0.15, h: 0.15}
+  shelf_l:   {x: -1.05,  y: 3.4, w: 0.5,  h: 0.25}
+  shelf_r:   {x: 1.05,   y: 3.4, w: 0.5,  h: 0.25}
+
+sets:
+  train:
+    - {label: A, x: 0.0,  y: 0.4, yaw: 90.0}
+    - {label: B, x: 0.3,  y: 0.4, yaw: 90.0}
+    - {label: C, x: -0.3, y: 0.4, yaw: 90.0}
+    - {label: D, x: 0.0,  y: 0.6, yaw: 90.0}
+
+  test:
+    - {label: E, x: 0.15,  y: 0.4, yaw: 90.0}
+    - {label: F, x: -0.15, y: 0.5, yaw: 90.0}
+
+  # Single perfectly centred start, facing the island head-on. Left and
+  # right routes are exact mirror images from here, so an MSE policy
+  # trained on equal numbers of each should average them (turn ~ 0).
+  centre:
+    - {label: C0, x: 0.0, y: 0.4, yaw: 90.0}
+
+  # Positions around the centre start, for testing the centre-trained
+  # policy. Trained only at x=0, y=0.4, so these are deliberately off the
+  # training distribution - we want to see what it does when it isn't
+  # sitting exactly where it learned.
+  centre_test:
+    - {label: L1, x: -0.15, y: 0.4, yaw: 90.0}
+    - {label: R1, x:  0.15, y: 0.4, yaw: 90.0}
+    - {label: L2, x: -0.30, y: 0.4, yaw: 90.0}
+    - {label: R2, x:  0.30, y: 0.4, yaw: 90.0}
+    - {label: B1, x:  0.00, y: 0.2, yaw: 90.0}
+    - {label: F1, x:  0.00, y: 0.8, yaw: 90.0}
+

@@ -1,0 +1,14 @@
+# colcon build artifacts
+build/
+install/
+log/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Third-party ROBOTIS hardware packages (not needed: simulation only)
+src/DynamixelSDK/
+src/open_manipulator/
+src/dynamixel_hardware_interface/
+src/dynamixel_interfaces/

@@ -1,0 +1,52 @@
+# Start poses for demonstration recording.
+#
+# The bay is centred at x = 0, y = 0.16.  A robot approaching from the +x
+# side must face -x (yaw = 180 deg); from the -x side it faces +x (yaw = 0).
+#
+# Edit by hand, or from the terminal:
+#     ros2 run parking_bc start_poses.py --set A --x 0.9 --y 0.6 --yaw 180
+#
+# yaw is in DEGREES here for readability; the code converts to radians.
+
+sets:
+
+  # Four starts all on the +x side: one manoeuvre for the policy to learn.
+  right:
+    - {label: A, x: 0.5, y: 1.0, yaw: 270.0}
+    - {label: B, x: 0.1, y: 1.0, yaw: 270.0}
+    - {label: C, x: -0.2, y: 1.0, yaw: 270.0}
+    - {label: D, x: -0.5, y: 1.0, yaw: 270.0}
+
+  # Two per side.  The manoeuvres are mirror images, so the policy has to
+  # learn both and choose from the state - considerably harder, and it
+  # needs noticeably more demonstrations per start.
+  both:
+    - {label: A,  x:  0.84, y: 0.55, yaw: 180}
+    - {label: B,  x:  0.98, y: 0.62, yaw: 180}
+    - {label: C,  x: -0.84, y: 0.55, yaw: 0}
+    - {label: D,  x: -0.98, y: 0.62, yaw: 0}
+
+  test:
+    - {label: E, x: 0.3, y: 1.0, yaw: 270.0}
+    - {label: F, x: -0.05, y: 1.0, yaw: 270.0}
+    - {label: G, x: -0.35, y: 1.0, yaw: 270.0}
+
+  # -- parking_twobay.world ONLY (worlds/generate_world.py --preset twobay) --
+  # Two bays, centred at x = -0.3708 and x = +0.3708, same size as the
+  # single bay above. These starts sit near x = 0 - roughly equidistant
+  # from both bays - deliberately, so which bay you park in is not forced
+  # by the geometry. Demonstrate NATURALLY: don't alternate left/right on
+  # purpose and don't always pick the same one either - just park wherever
+  # feels right each time. The resulting mix across episodes is exactly
+  # the multimodal demonstrations behind CS224R HW1's hard-mode pipes
+  # (same-looking state, two different valid expert actions).
+  hard:
+    - {label: H, x: 0.0,  y: 1.0,  yaw: 270.0}
+    - {label: I, x: 0.15, y: 1.0,  yaw: 270.0}
+    - {label: J, x: -0.15, y: 1.0, yaw: 270.0}
+    - {label: K, x: 0.0,  y: 0.9,  yaw: 270.0}
+
+  hard_test:
+    - {label: L, x: 0.05,  y: 1.0,  yaw: 270.0}
+    - {label: M, x: -0.1,  y: 1.0,  yaw: 270.0}
+    - {label: N, x: 0.0,   y: 0.95, yaw: 270.0}
