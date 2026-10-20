@@ -17,6 +17,10 @@ install(PROGRAMS
   scripts/show_starts_room.py
   scripts/analyse_rollouts_room.py
   scripts/dagger_room.py
+  scripts/pg_networks.py
+  scripts/pg_losses.py
+  scripts/pg_train_room.py
+  scripts/pg_policy_node_room.py
   DESTINATION lib/${PROJECT_NAME}
 )
 # More executable scripts are added here as they're built (dataset

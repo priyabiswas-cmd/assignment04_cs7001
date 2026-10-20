@@ -14,6 +14,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
@@ -43,6 +44,11 @@ def generate_launch_description():
         DeclareLaunchArgument('y', default_value='0.4'),
         DeclareLaunchArgument('yaw', default_value='1.5707963'),
         DeclareLaunchArgument('use_sim_time', default_value='true'),
+        # gzclient is only the visualisation window - sensors (including
+        # the camera) render inside gzserver either way, so this is purely
+        # a wall-clock speedup. Useful for policy-gradient training, which
+        # runs many episodes and never looks at the camera feed anyway.
+        DeclareLaunchArgument('gui', default_value='true'),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -55,6 +61,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(gazebo_ros, 'launch', 'gzclient.launch.py')),
+            condition=IfCondition(LaunchConfiguration('gui')),
         ),
 
         Node(
